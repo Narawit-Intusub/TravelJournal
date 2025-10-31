@@ -1,0 +1,95 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="TravelJournalDB" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Table Name="dbo.ActivityLogs" Member="ActivityLogs">
+    <Type Name="ActivityLog">
+      <Column Name="ActivityLogID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="ActivityType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ActivityDescription" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="IPAddress" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Association Name="User_ActivityLog" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.EntryLocations" Member="EntryLocations">
+    <Type Name="EntryLocation">
+      <Column Name="EntryLocationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="EntryID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LocationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VisitOrder" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Notes" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="PhotoURL" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Association Name="Location_EntryLocation" Member="Location" ThisKey="LocationID" OtherKey="LocationID" Type="Location" IsForeignKey="true" DeleteRule="CASCADE" />
+      <Association Name="TravelEntry_EntryLocation" Member="TravelEntry" ThisKey="EntryID" OtherKey="EntryID" Type="TravelEntry" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Locations" Member="Locations">
+    <Type Name="Location">
+      <Column Name="LocationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LocationName" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Address" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="City" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Country" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="Latitude" Type="System.Decimal" DbType="Decimal(10,8) NOT NULL" CanBeNull="false" />
+      <Column Name="Longitude" Type="System.Decimal" DbType="Decimal(11,8) NOT NULL" CanBeNull="false" />
+      <Column Name="Category" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Location_EntryLocation" Member="EntryLocations" ThisKey="LocationID" OtherKey="LocationID" Type="EntryLocation" />
+      <Association Name="Location_LocationStatistic" Member="LocationStatistics" ThisKey="LocationID" OtherKey="LocationID" Type="LocationStatistic" />
+    </Type>
+  </Table>
+  <Table Name="dbo.LocationStatistics" Member="LocationStatistics">
+    <Type Name="LocationStatistic">
+      <Column Name="StatID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="LocationID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="VisitCount" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="AverageRating" Type="System.Decimal" DbType="Decimal(3,2)" CanBeNull="true" />
+      <Column Name="PopularityScale" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="LastUpdated" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="Location_LocationStatistic" Member="Location" ThisKey="LocationID" OtherKey="LocationID" Type="Location" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.TravelEntries" Member="TravelEntries">
+    <Type Name="TravelEntry">
+      <Column Name="EntryID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(200) NOT NULL" CanBeNull="false" />
+      <Column Name="Description" Type="System.String" DbType="NVarChar(MAX)" CanBeNull="true" />
+      <Column Name="TravelDate" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="Rating" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="UpdatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="TravelEntry_EntryLocation" Member="EntryLocations" ThisKey="EntryID" OtherKey="EntryID" Type="EntryLocation" />
+      <Association Name="User_TravelEntry" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.UserActivityLogs" Member="UserActivityLogs">
+    <Type Name="UserActivityLog">
+      <Column Name="LogID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="UserID" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="ActivityType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="ActivityDescription" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="IPAddress" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="UserAgent" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Association Name="User_UserActivityLog" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" DeleteRule="CASCADE" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Users" Member="Users">
+    <Type Name="User">
+      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Username" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="Email" Type="System.String" DbType="NVarChar(100) NOT NULL" CanBeNull="false" />
+      <Column Name="PasswordHash" Type="System.String" DbType="NVarChar(255) NOT NULL" CanBeNull="false" />
+      <Column Name="FullName" Type="System.String" DbType="NVarChar(100)" CanBeNull="true" />
+      <Column Name="DateOfBirth" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="ProfileImage" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="LastLogin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="Role" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Association Name="User_ActivityLog" Member="ActivityLogs" ThisKey="UserID" OtherKey="UserID" Type="ActivityLog" />
+      <Association Name="User_TravelEntry" Member="TravelEntries" ThisKey="UserID" OtherKey="UserID" Type="TravelEntry" />
+      <Association Name="User_UserActivityLog" Member="UserActivityLogs" ThisKey="UserID" OtherKey="UserID" Type="UserActivityLog" />
+    </Type>
+  </Table>
+</Database>

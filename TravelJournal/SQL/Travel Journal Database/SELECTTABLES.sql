@@ -1,0 +1,11 @@
+﻿-- ดูตารางทั้งหมด
+SELECT * FROM INFORMATION_SCHEMA.TABLES;
+
+-- ดู Stored Procedures
+SELECT * FROM INFORMATION_SCHEMA.ROUTINES WHERE ROUTINE_TYPE = 'PROCEDURE';
+
+-- ดู Users
+SELECT * FROM Users;
+
+-- ดู Locations
+SELECT * FROM Locations;

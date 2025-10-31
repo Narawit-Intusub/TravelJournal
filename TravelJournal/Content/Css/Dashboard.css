@@ -1,0 +1,347 @@
+﻿/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    margin: 0;
+    padding: 0;
+    min-height: 100vh;
+}
+
+.container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: white;
+    min-height: 100vh;
+    box-shadow: 0 0 30px rgba(0,0,0,0.1);
+}
+
+/* Header Styles */
+.header {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    padding: 25px;
+    border-radius: 15px;
+    margin-bottom: 30px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
+}
+
+    .header h1 {
+        margin: 0 0 10px 0;
+        font-size: 2.5em;
+        font-weight: 600;
+    }
+
+.header-nav {
+    float: right;
+    background: rgba(255,255,255,0.2);
+    padding: 12px 20px;
+    border-radius: 25px;
+    backdrop-filter: blur(10px);
+    margin-top: -5px;
+}
+
+    .header-nav a {
+        color: white;
+        text-decoration: none;
+        margin: 0 10px;
+        transition: all 0.3s;
+        font-weight: 500;
+    }
+
+        .header-nav a:hover {
+            text-shadow: 0 0 10px rgba(255,255,255,0.8);
+        }
+
+/* Form Card Styles */
+.form-card {
+    background: white;
+    border: none;
+    padding: 30px;
+    margin-bottom: 30px;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+    .form-card h3 {
+        color: #667eea;
+        margin: 0 0 20px 0;
+        font-size: 1.8em;
+        font-weight: 600;
+        border-bottom: 3px solid #667eea;
+        padding-bottom: 10px;
+    }
+
+/* Form Table Styles */
+.form-table {
+    width: 100%;
+    border-collapse: separate;
+    border-spacing: 0 15px;
+}
+
+    .form-table td {
+        padding: 8px 15px;
+        vertical-align: middle;
+    }
+
+        .form-table td:first-child {
+            font-weight: 600;
+            color: #333;
+            width: 180px;
+        }
+
+/* Input Styles */
+input[type="text"],
+input[type="date"],
+textarea,
+select {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 8px;
+    font-size: 14px;
+    transition: all 0.3s;
+    box-sizing: border-box;
+}
+
+    input[type="text"]:focus,
+    input[type="date"]:focus,
+    textarea:focus,
+    select:focus {
+        outline: none;
+        border-color: #667eea;
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.1);
+    }
+
+textarea {
+    resize: vertical;
+    min-height: 80px;
+}
+
+/* Button Styles */
+.btn-primary {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: white;
+    border: none;
+    padding: 15px 40px;
+    border-radius: 25px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s;
+    box-shadow: 0 4px 15px rgba(102, 126, 234, 0.4);
+}
+
+    .btn-primary:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(102, 126, 234, 0.6);
+    }
+
+/* Map Styles */
+.map-section {
+    margin: 30px 0;
+}
+
+    .map-section h3 {
+        color: #667eea;
+        font-size: 1.8em;
+        margin-bottom: 15px;
+        font-weight: 600;
+    }
+
+#map {
+    height: 500px;
+    width: 100%;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.15);
+    border: 3px solid #667eea;
+}
+
+/* Timeline Styles */
+#timeline {
+    margin-top: 30px;
+    padding: 30px;
+    background: white;
+    border-radius: 15px;
+    box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+}
+
+    #timeline h3 {
+        color: #667eea;
+        font-size: 1.8em;
+        margin: 0 0 25px 0;
+        font-weight: 600;
+        border-bottom: 3px solid #667eea;
+        padding-bottom: 10px;
+    }
+
+.timeline-item {
+    margin-bottom: 20px;
+    padding: 20px;
+    border-left: 5px solid #667eea;
+    background: linear-gradient(135deg, #f8f9ff 0%, #fff 100%);
+    border-radius: 10px;
+    position: relative;
+    transition: all 0.3s;
+}
+
+    .timeline-item:hover {
+        transform: translateX(5px);
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.2);
+    }
+
+    .timeline-item strong {
+        color: #333;
+        font-size: 1.1em;
+    }
+
+.timeline-item-date {
+    color: #667eea;
+    font-weight: 600;
+    font-size: 1.1em;
+}
+
+.timeline-item-location {
+    color: #666;
+    margin: 8px 0;
+}
+
+.timeline-item-details {
+    color: #888;
+    font-size: 0.95em;
+    margin: 5px 0;
+}
+
+.timeline-item-description {
+    color: #555;
+    margin-top: 10px;
+    line-height: 1.6;
+}
+
+/* Delete Button */
+.delete-btn {
+    position: absolute;
+    top: 15px;
+    right: 15px;
+    background: linear-gradient(135deg, #ff6b6b 0%, #ee5a6f 100%);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 20px;
+    cursor: pointer;
+    font-size: 13px;
+    font-weight: 600;
+    transition: all 0.3s;
+    box-shadow: 0 3px 10px rgba(255, 107, 107, 0.3);
+}
+
+    .delete-btn:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 5px 15px rgba(255, 107, 107, 0.5);
+    }
+
+/* Message Label */
+.message-label {
+    padding: 12px 20px;
+    border-radius: 8px;
+    margin-bottom: 15px;
+    display: inline-block;
+    font-weight: 500;
+}
+
+.message-error {
+    background: #fee;
+    color: #c33;
+    border-left: 4px solid #c33;
+}
+
+.message-success {
+    background: #efe;
+    color: #3c3;
+    border-left: 4px solid #3c3;
+}
+
+/* Validator Styles */
+.validator {
+    color: #ff6b6b;
+    font-weight: bold;
+    margin-left: 5px;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .container {
+        padding: 10px;
+    }
+
+    .header h1 {
+        font-size: 1.8em;
+    }
+
+    .header-nav {
+        float: none;
+        text-align: center;
+        margin-top: 15px;
+    }
+
+    .form-table td {
+        display: block;
+        width: 100%;
+    }
+
+        .form-table td:first-child {
+            width: 100%;
+            margin-bottom: 5px;
+        }
+
+    #map {
+        height: 350px;
+    }
+
+    .timeline-item {
+        padding: 15px;
+    }
+
+    .delete-btn {
+        position: static;
+        display: block;
+        margin-top: 10px;
+        width: 100%;
+    }
+}
+
+/* Loading Animation */
+.loading {
+    display: inline-block;
+    width: 20px;
+    height: 20px;
+    border: 3px solid rgba(102, 126, 234, 0.3);
+    border-radius: 50%;
+    border-top-color: #667eea;
+    animation: spin 1s ease-in-out infinite;
+}
+
+@keyframes spin {
+    to {
+        transform: rotate(360deg);
+    }
+}
+
+/* Section Divider */
+.section-divider {
+    height: 3px;
+    background: linear-gradient(90deg, #667eea 0%, #764ba2 100%);
+    border: none;
+    margin: 30px 0;
+    border-radius: 2px;
+}
+
+/* Card Shadow Effect */
+.card-shadow {
+    box-shadow: 0 10px 25px rgba(0,0,0,0.1);
+    transition: all 0.3s;
+}
+
+    .card-shadow:hover {
+        box-shadow: 0 15px 35px rgba(0,0,0,0.15);
+    }

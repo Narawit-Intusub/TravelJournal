@@ -1,0 +1,221 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+/* General Styles */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+}
+
+.register-container {
+    background: white;
+    border-radius: 20px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+    overflow: hidden;
+    width: 100%;
+    max-width: 500px;
+    animation: slideUp 0.5s ease-out;
+}
+
+@keyframes slideUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.register-header {
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    padding: 40px 30px;
+    text-align: center;
+}
+
+    .register-header h1 {
+        font-size: 32px;
+        font-weight: 600;
+        margin-bottom: 10px;
+    }
+
+    .register-header .icon {
+        font-size: 48px;
+        margin-bottom: 10px;
+    }
+
+    .register-header p {
+        font-size: 14px;
+        opacity: 0.9;
+    }
+
+.register-body {
+    padding: 40px 30px;
+}
+
+.success-message {
+    background-color: #d4edda;
+    color: #155724;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    border-left: 4px solid #28a745;
+}
+
+.error-message {
+    background-color: #fee;
+    color: #c33;
+    padding: 12px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+    font-size: 14px;
+    border-left: 4px solid #c33;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+    .form-group label {
+        display: block;
+        margin-bottom: 8px;
+        color: #333;
+        font-weight: 500;
+        font-size: 14px;
+    }
+
+.input-wrapper {
+    position: relative;
+}
+
+.form-control {
+    width: 100%;
+    padding: 12px 15px;
+    border: 2px solid #e0e0e0;
+    border-radius: 10px;
+    font-size: 15px;
+    transition: all 0.3s ease;
+    background-color: #f8f9fa;
+}
+
+    .form-control:focus {
+        outline: none;
+        border-color: #f093fb;
+        background-color: white;
+        box-shadow: 0 0 0 4px rgba(240, 147, 251, 0.1);
+    }
+
+.validation-error {
+    color: #c33;
+    font-size: 12px;
+    margin-top: 4px;
+    display: block;
+}
+
+.btn-register {
+    width: 100%;
+    padding: 14px;
+    background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+    color: white;
+    border: none;
+    border-radius: 10px;
+    font-size: 16px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(240, 147, 251, 0.4);
+    margin-top: 10px;
+}
+
+    .btn-register:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 6px 20px rgba(240, 147, 251, 0.6);
+    }
+
+    .btn-register:active {
+        transform: translateY(0);
+    }
+
+.divider {
+    text-align: center;
+    margin: 25px 0;
+    position: relative;
+}
+
+    .divider::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 50%;
+        width: 100%;
+        height: 1px;
+        background: #e0e0e0;
+    }
+
+    .divider span {
+        background: white;
+        padding: 0 15px;
+        color: #999;
+        font-size: 14px;
+        position: relative;
+        z-index: 1;
+    }
+
+.login-link {
+    text-align: center;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+}
+
+    .login-link p {
+        color: #666;
+        font-size: 14px;
+        margin: 0;
+    }
+
+    .login-link a {
+        color: #f093fb;
+        text-decoration: none;
+        font-weight: 600;
+        transition: all 0.3s ease;
+    }
+
+        .login-link a:hover {
+            color: #f5576c;
+            text-decoration: underline;
+        }
+
+/* Icons */
+.icon-register::before {
+    content: '📝';
+}
+
+/* Responsive */
+@media (max-width: 480px) {
+    .register-container {
+        border-radius: 0;
+    }
+
+    .register-header {
+        padding: 30px 20px;
+    }
+
+        .register-header h1 {
+            font-size: 26px;
+        }
+
+    .register-body {
+        padding: 30px 20px;
+    }
+}
