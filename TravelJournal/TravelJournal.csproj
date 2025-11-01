@@ -88,15 +88,10 @@
     <Content Include="Register.aspx" />
     <Content Include="Scripts\admin-stats.js" />
     <Content Include="Scripts\dashboard-map.js" />
-    <Content Include="SQL\AddRoleSystem.sql" />
-    <Content Include="SQL\AdminFeatures.sql" />
-    <Content Include="SQL\CreateTestUsers.sql" />
-    <Content Include="SQL\Travel Journal Database\SampleData.sql" />
-    <Content Include="SQL\Travel Journal Database\SELECTTABLES.sql" />
-    <Content Include="SQL\Travel Journal Database\TravelJournalDatabase.sql" />
-    <Content Include="SQL\Travel Journal Database\VerifyInformation.sql" />
-    <Content Include="SQL\TravelJournalDB.sql" />
-    <Content Include="SQL\UpdateProfileFeature.sql" />
+    <Content Include="SQL_DDL_DML _DQL\DDL\AddActivityLogID.sql" />
+    <Content Include="SQL_DDL_DML _DQL\DDL\DDL.sql" />
+    <Content Include="SQL_DDL_DML _DQL\DML\DML.sql" />
+    <Content Include="SQL_DDL_DML _DQL\DQL\DQL.sql" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -147,7 +142,7 @@
     <Compile Include="Register.aspx.designer.cs">
       <DependentUpon>Register.aspx</DependentUpon>
     </Compile>
-    <Compile Include="SQL\Travel Journal Database\DataClasses1.designer.cs">
+    <Compile Include="ER\DataClasses1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClasses1.dbml</DependentUpon>
@@ -155,12 +150,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
-    <Content Include="SQL\Travel Journal Database\DataClasses1.dbml">
+    <Content Include="ER\DataClasses1.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>DataClasses1.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </Content>
-    <None Include="SQL\Travel Journal Database\DataClasses1.dbml.layout">
+    <None Include="ER\DataClasses1.dbml.layout">
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </None>
     <None Include="Web.Debug.config">

@@ -9,7 +9,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace TravelJournal.SQL.Travel_Journal_Database
+namespace TravelJournal.ER
 {
 	using System.Data.Linq;
 	using System.Data.Linq.Mapping;
