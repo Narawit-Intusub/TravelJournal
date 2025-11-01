@@ -89,6 +89,7 @@
     <Content Include="Scripts\admin-stats.js" />
     <Content Include="Scripts\dashboard-map.js" />
     <Content Include="SQL_DDL_DML _DQL\DDL\DDL.sql" />
+    <Content Include="SQL_DDL_DML _DQL\DDL\StoredProcedures.sql" />
     <Content Include="SQL_DDL_DML _DQL\DML\DML.sql" />
     <Content Include="SQL_DDL_DML _DQL\DQL\DQL.sql" />
     <Content Include="Web.config" />
