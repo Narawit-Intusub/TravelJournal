@@ -99,8 +99,8 @@ ORDER BY CreatedDate DESC;
 | Username | Password |
 |----------|----------|
 | `admin` | `password123` |
-| `john_doe` | `password123` |
-| `jane_smith` | `password123` |
+| `user001` | `password123` |
+| `user002` | `password123` |
 
 > ⚠️ **คำเตือน:** ใช้สำหรับการทดสอบเท่านั้น
 
