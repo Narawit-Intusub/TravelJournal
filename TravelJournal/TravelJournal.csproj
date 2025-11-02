@@ -91,7 +91,7 @@
     <Content Include="SQL_DDL_DML _DQL\DDL\schema.sql" />
     <Content Include="SQL_DDL_DML _DQL\DDL\programmability.sql" />
     <Content Include="SQL_DDL_DML _DQL\DML\data.sql" />
-    <Content Include="SQL_DDL_DML _DQL\DQL\DQL.sql" />
+    <Content Include="SQL_DDL_DML _DQL\DQL\verify.sql" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
