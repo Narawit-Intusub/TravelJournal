@@ -144,9 +144,18 @@ namespace TravelJournal
                 string email = txtEmail.Text.Trim();
                 DateTime? dateOfBirth = null;
 
+                // แก้ไข: ตรวจสอบว่ามีค่าก่อนแปลง
                 if (!string.IsNullOrEmpty(txtDateOfBirth.Text))
                 {
-                    dateOfBirth = Convert.ToDateTime(txtDateOfBirth.Text);
+                    DateTime tempDate;
+                    if (DateTime.TryParse(txtDateOfBirth.Text, out tempDate))
+                    {
+                        // ตรวจสอบว่าอยู่ในช่วงที่ SQL Server รองรับ
+                        if (tempDate >= new DateTime(1753, 1, 1) && tempDate <= new DateTime(9999, 12, 31))
+                        {
+                            dateOfBirth = tempDate;
+                        }
+                    }
                 }
 
                 // Get current profile image path
@@ -163,8 +172,8 @@ namespace TravelJournal
                     new SqlParameter("@UserID", userID),
                     new SqlParameter("@FullName", fullName),
                     new SqlParameter("@Email", email),
-                    new SqlParameter("@DateOfBirth", (object)dateOfBirth ?? DBNull.Value),
-                    new SqlParameter("@ProfileImage", (object)currentImagePath ?? DBNull.Value)
+                    new SqlParameter("@DateOfBirth", dateOfBirth.HasValue ? (object)dateOfBirth.Value : DBNull.Value),
+                    new SqlParameter("@ProfileImage", !string.IsNullOrEmpty(currentImagePath) ? (object)currentImagePath : DBNull.Value)
                 };
 
                 DBHelper.ExecuteStoredProcedure("sp_UpdateUserProfile", parameters);

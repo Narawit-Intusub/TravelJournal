@@ -1,15 +1,4 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="TravelJournalDB" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
-  <Table Name="dbo.ActivityLogs" Member="ActivityLogs">
-    <Type Name="ActivityLog">
-      <Column Name="ActivityLogID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
-      <Column Name="UserID" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="ActivityType" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="ActivityDescription" Type="System.String" DbType="NVarChar(500)" CanBeNull="true" />
-      <Column Name="IPAddress" Type="System.String" DbType="NVarChar(45)" CanBeNull="true" />
-      <Column Name="CreatedDate" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
-      <Association Name="User_ActivityLog" Member="User" ThisKey="UserID" OtherKey="UserID" Type="User" IsForeignKey="true" DeleteRule="CASCADE" DeleteOnNull="true" />
-    </Type>
-  </Table>
   <Table Name="dbo.EntryLocations" Member="EntryLocations">
     <Type Name="EntryLocation">
       <Column Name="EntryLocationID" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
@@ -87,7 +76,6 @@
       <Column Name="LastLogin" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
       <Column Name="IsActive" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
       <Column Name="Role" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Association Name="User_ActivityLog" Member="ActivityLogs" ThisKey="UserID" OtherKey="UserID" Type="ActivityLog" />
       <Association Name="User_TravelEntry" Member="TravelEntries" ThisKey="UserID" OtherKey="UserID" Type="TravelEntry" />
       <Association Name="User_UserActivityLog" Member="UserActivityLogs" ThisKey="UserID" OtherKey="UserID" Type="UserActivityLog" />
     </Type>

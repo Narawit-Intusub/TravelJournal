@@ -30,9 +30,6 @@ namespace TravelJournal.ER
 		
     #region Extensibility Method Definitions
     partial void OnCreated();
-    partial void InsertActivityLog(ActivityLog instance);
-    partial void UpdateActivityLog(ActivityLog instance);
-    partial void DeleteActivityLog(ActivityLog instance);
     partial void InsertEntryLocation(EntryLocation instance);
     partial void UpdateEntryLocation(EntryLocation instance);
     partial void DeleteEntryLocation(EntryLocation instance);
@@ -75,14 +72,6 @@ namespace TravelJournal.ER
 				base(connection, mappingSource)
 		{
 			OnCreated();
-		}
-		
-		public System.Data.Linq.Table<ActivityLog> ActivityLogs
-		{
-			get
-			{
-				return this.GetTable<ActivityLog>();
-			}
 		}
 		
 		public System.Data.Linq.Table<EntryLocation> EntryLocations
@@ -130,229 +119,6 @@ namespace TravelJournal.ER
 			get
 			{
 				return this.GetTable<User>();
-			}
-		}
-	}
-	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.ActivityLogs")]
-	public partial class ActivityLog : INotifyPropertyChanging, INotifyPropertyChanged
-	{
-		
-		private static PropertyChangingEventArgs emptyChangingEventArgs = new PropertyChangingEventArgs(String.Empty);
-		
-		private int _ActivityLogID;
-		
-		private int _UserID;
-		
-		private string _ActivityType;
-		
-		private string _ActivityDescription;
-		
-		private string _IPAddress;
-		
-		private System.DateTime _CreatedDate;
-		
-		private EntityRef<User> _User;
-		
-    #region Extensibility Method Definitions
-    partial void OnLoaded();
-    partial void OnValidate(System.Data.Linq.ChangeAction action);
-    partial void OnCreated();
-    partial void OnActivityLogIDChanging(int value);
-    partial void OnActivityLogIDChanged();
-    partial void OnUserIDChanging(int value);
-    partial void OnUserIDChanged();
-    partial void OnActivityTypeChanging(string value);
-    partial void OnActivityTypeChanged();
-    partial void OnActivityDescriptionChanging(string value);
-    partial void OnActivityDescriptionChanged();
-    partial void OnIPAddressChanging(string value);
-    partial void OnIPAddressChanged();
-    partial void OnCreatedDateChanging(System.DateTime value);
-    partial void OnCreatedDateChanged();
-    #endregion
-		
-		public ActivityLog()
-		{
-			this._User = default(EntityRef<User>);
-			OnCreated();
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActivityLogID", AutoSync=AutoSync.OnInsert, DbType="Int NOT NULL IDENTITY", IsPrimaryKey=true, IsDbGenerated=true)]
-		public int ActivityLogID
-		{
-			get
-			{
-				return this._ActivityLogID;
-			}
-			set
-			{
-				if ((this._ActivityLogID != value))
-				{
-					this.OnActivityLogIDChanging(value);
-					this.SendPropertyChanging();
-					this._ActivityLogID = value;
-					this.SendPropertyChanged("ActivityLogID");
-					this.OnActivityLogIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_UserID", DbType="Int NOT NULL")]
-		public int UserID
-		{
-			get
-			{
-				return this._UserID;
-			}
-			set
-			{
-				if ((this._UserID != value))
-				{
-					if (this._User.HasLoadedOrAssignedValue)
-					{
-						throw new System.Data.Linq.ForeignKeyReferenceAlreadyHasValueException();
-					}
-					this.OnUserIDChanging(value);
-					this.SendPropertyChanging();
-					this._UserID = value;
-					this.SendPropertyChanged("UserID");
-					this.OnUserIDChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActivityType", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string ActivityType
-		{
-			get
-			{
-				return this._ActivityType;
-			}
-			set
-			{
-				if ((this._ActivityType != value))
-				{
-					this.OnActivityTypeChanging(value);
-					this.SendPropertyChanging();
-					this._ActivityType = value;
-					this.SendPropertyChanged("ActivityType");
-					this.OnActivityTypeChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_ActivityDescription", DbType="NVarChar(500)")]
-		public string ActivityDescription
-		{
-			get
-			{
-				return this._ActivityDescription;
-			}
-			set
-			{
-				if ((this._ActivityDescription != value))
-				{
-					this.OnActivityDescriptionChanging(value);
-					this.SendPropertyChanging();
-					this._ActivityDescription = value;
-					this.SendPropertyChanged("ActivityDescription");
-					this.OnActivityDescriptionChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_IPAddress", DbType="NVarChar(45)")]
-		public string IPAddress
-		{
-			get
-			{
-				return this._IPAddress;
-			}
-			set
-			{
-				if ((this._IPAddress != value))
-				{
-					this.OnIPAddressChanging(value);
-					this.SendPropertyChanging();
-					this._IPAddress = value;
-					this.SendPropertyChanged("IPAddress");
-					this.OnIPAddressChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_CreatedDate", DbType="DateTime NOT NULL")]
-		public System.DateTime CreatedDate
-		{
-			get
-			{
-				return this._CreatedDate;
-			}
-			set
-			{
-				if ((this._CreatedDate != value))
-				{
-					this.OnCreatedDateChanging(value);
-					this.SendPropertyChanging();
-					this._CreatedDate = value;
-					this.SendPropertyChanged("CreatedDate");
-					this.OnCreatedDateChanged();
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_ActivityLog", Storage="_User", ThisKey="UserID", OtherKey="UserID", IsForeignKey=true, DeleteOnNull=true, DeleteRule="CASCADE")]
-		public User User
-		{
-			get
-			{
-				return this._User.Entity;
-			}
-			set
-			{
-				User previousValue = this._User.Entity;
-				if (((previousValue != value) 
-							|| (this._User.HasLoadedOrAssignedValue == false)))
-				{
-					this.SendPropertyChanging();
-					if ((previousValue != null))
-					{
-						this._User.Entity = null;
-						previousValue.ActivityLogs.Remove(this);
-					}
-					this._User.Entity = value;
-					if ((value != null))
-					{
-						value.ActivityLogs.Add(this);
-						this._UserID = value.UserID;
-					}
-					else
-					{
-						this._UserID = default(int);
-					}
-					this.SendPropertyChanged("User");
-				}
-			}
-		}
-		
-		public event PropertyChangingEventHandler PropertyChanging;
-		
-		public event PropertyChangedEventHandler PropertyChanged;
-		
-		protected virtual void SendPropertyChanging()
-		{
-			if ((this.PropertyChanging != null))
-			{
-				this.PropertyChanging(this, emptyChangingEventArgs);
-			}
-		}
-		
-		protected virtual void SendPropertyChanged(String propertyName)
-		{
-			if ((this.PropertyChanged != null))
-			{
-				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
 		}
 	}
@@ -1728,8 +1494,6 @@ namespace TravelJournal.ER
 		
 		private string _Role;
 		
-		private EntitySet<ActivityLog> _ActivityLogs;
-		
 		private EntitySet<TravelEntry> _TravelEntries;
 		
 		private EntitySet<UserActivityLog> _UserActivityLogs;
@@ -1764,7 +1528,6 @@ namespace TravelJournal.ER
 		
 		public User()
 		{
-			this._ActivityLogs = new EntitySet<ActivityLog>(new Action<ActivityLog>(this.attach_ActivityLogs), new Action<ActivityLog>(this.detach_ActivityLogs));
 			this._TravelEntries = new EntitySet<TravelEntry>(new Action<TravelEntry>(this.attach_TravelEntries), new Action<TravelEntry>(this.detach_TravelEntries));
 			this._UserActivityLogs = new EntitySet<UserActivityLog>(new Action<UserActivityLog>(this.attach_UserActivityLogs), new Action<UserActivityLog>(this.detach_UserActivityLogs));
 			OnCreated();
@@ -1990,19 +1753,6 @@ namespace TravelJournal.ER
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_ActivityLog", Storage="_ActivityLogs", ThisKey="UserID", OtherKey="UserID")]
-		public EntitySet<ActivityLog> ActivityLogs
-		{
-			get
-			{
-				return this._ActivityLogs;
-			}
-			set
-			{
-				this._ActivityLogs.Assign(value);
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.AssociationAttribute(Name="User_TravelEntry", Storage="_TravelEntries", ThisKey="UserID", OtherKey="UserID")]
 		public EntitySet<TravelEntry> TravelEntries
 		{
@@ -2047,18 +1797,6 @@ namespace TravelJournal.ER
 			{
 				this.PropertyChanged(this, new PropertyChangedEventArgs(propertyName));
 			}
-		}
-		
-		private void attach_ActivityLogs(ActivityLog entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = this;
-		}
-		
-		private void detach_ActivityLogs(ActivityLog entity)
-		{
-			this.SendPropertyChanging();
-			entity.User = null;
 		}
 		
 		private void attach_TravelEntries(TravelEntry entity)

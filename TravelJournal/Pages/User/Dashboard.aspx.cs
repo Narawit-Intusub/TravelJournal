@@ -90,43 +90,70 @@ namespace TravelJournal
 
         private void LoadTravelEntries()
         {
-            int userID = Convert.ToInt32(Session["UserID"]);
-
-            // เรียก Stored Procedure
-            SqlParameter[] parameters = new SqlParameter[]
+            try
             {
-                new SqlParameter("@UserID", userID)
-            };
+                int userID = Convert.ToInt32(Session["UserID"]);
 
-            DataTable dt = DBHelper.ExecuteStoredProcedure("sp_GetUserTravelEntries", parameters);
-
-            // Bind data to Timeline
-            rptTimeline.DataSource = dt;
-            rptTimeline.DataBind();
-
-            // สร้าง JSON สำหรับ Google Map
-            if (dt.Rows.Count > 0)
-            {
-                StringBuilder jsonBuilder = new StringBuilder();
-                jsonBuilder.Append("[");
-
-                for (int i = 0; i < dt.Rows.Count; i++)
+                SqlParameter[] parameters = new SqlParameter[]
                 {
-                    if (i > 0) jsonBuilder.Append(",");
+            new SqlParameter("@UserID", userID)
+                };
 
-                    jsonBuilder.Append("{");
-                    jsonBuilder.AppendFormat("\"LocationName\":\"{0}\",", dt.Rows[i]["LocationName"]);
-                    jsonBuilder.AppendFormat("\"City\":\"{0}\",", dt.Rows[i]["City"]);
-                    jsonBuilder.AppendFormat("\"Country\":\"{0}\",", dt.Rows[i]["Country"]);
-                    jsonBuilder.AppendFormat("\"Latitude\":{0},", dt.Rows[i]["Latitude"]);
-                    jsonBuilder.AppendFormat("\"Longitude\":{0},", dt.Rows[i]["Longitude"]);
-                    jsonBuilder.AppendFormat("\"Rating\":{0},", dt.Rows[i]["Rating"]);
-                    jsonBuilder.AppendFormat("\"TravelDate\":\"{0:dd/MM/yyyy}\"", Convert.ToDateTime(dt.Rows[i]["TravelDate"]));
-                    jsonBuilder.Append("}");
+                DataTable dt = DBHelper.ExecuteStoredProcedure("sp_GetUserTravelEntries", parameters);
+
+                rptTimeline.DataSource = dt;
+                rptTimeline.DataBind();
+
+                if (dt.Rows.Count > 0)
+                {
+                    StringBuilder jsonBuilder = new StringBuilder();
+                    jsonBuilder.Append("[");
+
+                    for (int i = 0; i < dt.Rows.Count; i++)
+                    {
+                        if (i > 0) jsonBuilder.Append(",");
+
+                        // ✅ เพิ่มการเช็ค DBNull
+                        string locationName = dt.Rows[i]["LocationName"] != DBNull.Value ?
+                            dt.Rows[i]["LocationName"].ToString() : "";
+                        string city = dt.Rows[i]["City"] != DBNull.Value ?
+                            dt.Rows[i]["City"].ToString() : "";
+                        string country = dt.Rows[i]["Country"] != DBNull.Value ?
+                            dt.Rows[i]["Country"].ToString() : "";
+
+                        jsonBuilder.Append("{");
+                        jsonBuilder.AppendFormat("\"LocationName\":\"{0}\",", locationName);
+                        jsonBuilder.AppendFormat("\"City\":\"{0}\",", city);
+                        jsonBuilder.AppendFormat("\"Country\":\"{0}\",", country);
+                        jsonBuilder.AppendFormat("\"Latitude\":{0},", dt.Rows[i]["Latitude"]);
+                        jsonBuilder.AppendFormat("\"Longitude\":{0},", dt.Rows[i]["Longitude"]);
+                        jsonBuilder.AppendFormat("\"Rating\":{0},", dt.Rows[i]["Rating"]);
+
+                        if (dt.Rows[i]["TravelDate"] != DBNull.Value)
+                        {
+                            DateTime travelDate = Convert.ToDateTime(dt.Rows[i]["TravelDate"]);
+                            jsonBuilder.AppendFormat("\"TravelDate\":\"{0:dd/MM/yyyy}\"", travelDate);
+                        }
+                        else
+                        {
+                            jsonBuilder.Append("\"TravelDate\":\"\"");
+                        }
+
+                        jsonBuilder.Append("}");
+                    }
+
+                    jsonBuilder.Append("]");
+                    hfMapData.Value = jsonBuilder.ToString();
                 }
-
-                jsonBuilder.Append("]");
-                hfMapData.Value = jsonBuilder.ToString();
+                else
+                {
+                    hfMapData.Value = "[]";
+                }
+            }
+            catch (Exception ex)
+            {
+                lblMessage.ForeColor = System.Drawing.Color.Red;
+                lblMessage.Text = "Error loading entries: " + ex.Message;
             }
         }
 

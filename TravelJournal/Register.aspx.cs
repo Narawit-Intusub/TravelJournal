@@ -34,7 +34,7 @@ namespace TravelJournal
                 var result = DBHelper.ExecuteStoredProcedure("sp_RegisterUser", parameters);
 
                 // Set Role เป็น User (default)
-                if (result.Rows.Count > 0)
+                if (result.Rows.Count > 0 && result.Rows[0]["NewUserID"] != DBNull.Value)
                 {
                     int newUserID = Convert.ToInt32(result.Rows[0]["NewUserID"]);
                     DBHelper.ExecuteNonQuery("UPDATE Users SET Role = 'User' WHERE UserID = @UserID",
@@ -42,6 +42,8 @@ namespace TravelJournal
                 }
 
                 // Registration สำเร็จ - redirect ไป Login
+                pnlMessage.Visible = true;
+                pnlMessage.CssClass = "success-message";
                 lblMessage.ForeColor = System.Drawing.Color.Green;
                 lblMessage.Text = "Registration successful! Redirecting to login...";
 
@@ -49,6 +51,8 @@ namespace TravelJournal
             }
             catch (SqlException ex)
             {
+                pnlMessage.Visible = true;
+                pnlMessage.CssClass = "error-message";
                 // ตรวจสอบ error ของ unique constraint
                 if (ex.Message.Contains("Username") || ex.Message.Contains("UNIQUE"))
                 {
@@ -61,6 +65,8 @@ namespace TravelJournal
             }
             catch (Exception ex)
             {
+                pnlMessage.Visible = true;
+                pnlMessage.CssClass = "error-message";
                 lblMessage.Text = "Error: " + ex.Message;
             }
         }
